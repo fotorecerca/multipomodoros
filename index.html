@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoros Múltiples</title>
+    <!-- PWA Config -->
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="manifest" href="manifest.json">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pomodoro-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .pomodoro-box {
+            min-width: 280px;
+            flex: 1;
+        }
+        @media (max-width: 768px) {
+            .pomodoro-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
+    <div class="pomodoro-container">
+        <!-- Pomodoro 1: RESPIRACIÓN -->
+        <div class="pomodoro-box bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-orange-500 p-4 text-white">
+                <h1 class="text-xl font-bold text-center">RESPIRACIÓN</h1>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div id="timer1" class="text-4xl font-mono font-bold my-2">1:00</div>
+                    <div id="status1" class="text-lg font-semibold mb-2">Listo</div>
+                    <div class="flex justify-center space-x-2">
+                        <button onclick="startTimer(1)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button onclick="pauseTimer(1)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg" disabled id="pauseBtn1">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer(1)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pomodoro 2: MINDFULLNESS -->
+        <div class="pomodoro-box bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-yellow-500 p-4 text-white">
+                <h1 class="text-xl font-bold text-center">MINDFULLNESS</h1>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div id="timer2" class="text-4xl font-mono font-bold my-2">3:00</div>
+                    <div id="status2" class="text-lg font-semibold mb-2">Listo</div>
+                    <div class="flex justify-center space-x-2">
+                        <button onclick="startTimer(2)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button onclick="pauseTimer(2)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg" disabled id="pauseBtn2">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer(2)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pomodoro 3: DESCONEXIÓN -->
+        <div class="pomodoro-box bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-green-400 p-4 text-white">
+                <h1 class="text-xl font-bold text-center">DESCONEXIÓN</h1>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div id="timer3" class="text-4xl font-mono font-bold my-2">5:00</div>
+                    <div id="status3" class="text-lg font-semibold mb-2">Listo</div>
+                    <div class="flex justify-center space-x-2">
+                        <button onclick="startTimer(3)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button onclick="pauseTimer(3)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg" disabled id="pauseBtn3">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer(3)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pomodoro 4: ENTRENAMIENTO -->
+        <div class="pomodoro-box bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-red-500 p-4 text-white">
+                <h1 class="text-xl font-bold text-center">ENTRENAMIENTO</h1>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div id="timer4" class="text-4xl font-mono font-bold my-2">15:00</div>
+                    <div id="status4" class="text-lg font-semibold mb-2">Listo</div>
+                    <div class="flex justify-center space-x-2">
+                        <button onclick="startTimer(4)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button onclick="pauseTimer(4)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg" disabled id="pauseBtn4">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer(4)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pomodoro 5: TRABAJO -->
+        <div class="pomodoro-box bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-blue-500 p-4 text-white">
+                <h1 class="text-xl font-bold text-center">TRABAJO</h1>
+            </div>
+            <div class="p-4">
+                <div class="text-center mb-4">
+                    <div id="timer5" class="text-4xl font-mono font-bold my-2">20:00</div>
+                    <div id="status5" class="text-lg font-semibold mb-2">Listo</div>
+                    <div class="flex justify-center space-x-2">
+                        <button onclick="startTimer(5)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button onclick="pauseTimer(5)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg" disabled id="pauseBtn5">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer(5)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sonidos de notificación -->
+    <audio id="alarmSound1" src="https://assets.mixkit.co/sfx/preview/mixkit-wind-chime-2015.mp3" preload="auto"></audio>
+    <audio id="alarmSound2" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-gong-notification-2542.mp3" preload="auto"></audio>
+    <audio id="alarmSound3" src="https://assets.mixkit.co/sfx/preview/mixkit-crystal-glass-harp-1930.mp3" preload="auto"></audio>
+    <audio id="alarmSound4" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
+    <audio id="alarmSound5" src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-positive-interface-2570.mp3" preload="auto"></audio>
+
+    <!-- Service Worker Registration -->
+    <script>
+        // Configuración de cada pomodoro
+        const pomodoros = {
+            1: { duration: 1 * 60, timer: null, running: false, timeLeft: 1 * 60, sound: "alarmSound1" },
+            2: { duration: 3 * 60, timer: null, running: false, timeLeft: 3 * 60, sound: "alarmSound2" },
+            3: { duration: 5 * 60, timer: null, running: false, timeLeft: 5 * 60, sound: "alarmSound3" },
+            4: { duration: 15 * 60, timer: null, running: false, timeLeft: 15 * 60, sound: "alarmSound4" },
+            5: { duration: 20 * 60, timer: null, running: false, timeLeft: 20 * 60, sound: "alarmSound5" }
+        };
+
+        // Formatear tiempo (mm:ss)
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            return `${mins}:${secs}`;
+        }
+
+        // Actualizar display de un pomodoro
+        function updateDisplay(num) {
+            document.getElementById(`timer${num}`).textContent = formatTime(pomodoros[num].timeLeft);
+            document.getElementById(`status${num}`).textContent = pomodoros[num].running ? 'En progreso' : (pomodoros[num].timeLeft === pomodoros[num].duration ? 'Listo' : 'Pausado');
+        }
+
+        // Iniciar temporizador
+        function startTimer(num) {
+            if (!pomodoros[num].running) {
+                pomodoros[num].running = true;
+                document.querySelector(`button[onclick="startTimer(${num})"]`).disabled = true;
+                document.getElementById(`pauseBtn${num}`).disabled = false;
+                
+                pomodoros[num].timer = setInterval(() => {
+                    pomodoros[num].timeLeft--;
+                    updateDisplay(num);
+                    
+                    if (pomodoros[num].timeLeft <= 0) {
+                        clearInterval(pomodoros[num].timer);
+                        document.getElementById(pomodoros[num].sound).play();
+                        pomodoros[num].running = false;
+                        document.getElementById(`status${num}`).textContent = '¡Completado!';
+                        document.querySelector(`button[onclick="startTimer(${num})"]`).disabled = false;
+                        document.getElementById(`pauseBtn${num}`).disabled = true;
+                    }
+                }, 1000);
+                
+                updateDisplay(num);
+            }
+        }
+
+        // Pausar temporizador
+        function pauseTimer(num) {
+            if (pomodoros[num].running) {
+                clearInterval(pomodoros[num].timer);
+                pomodoros[num].running = false;
+                document.querySelector(`button[onclick="startTimer(${num})"]`).disabled = false;
+                document.getElementById(`pauseBtn${num}`).disabled = true;
+                updateDisplay(num);
+            }
+        }
+
+        // Reiniciar temporizador
+        function resetTimer(num) {
+            clearInterval(pomodoros[num].timer);
+            pomodoros[num].running = false;
+            pomodoros[num].timeLeft = pomodoros[num].duration;
+            document.querySelector(`button[onclick="startTimer(${num})"]`).disabled = false;
+            document.getElementById(`pauseBtn${num}`).disabled = true;
+            updateDisplay(num);
+        }
+
+        // Inicializar displays
+        for (let i = 1; i <= 5; i++) {
+            updateDisplay(i);
+        }
+
+        // Registrar Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('SW registrado:', registration.scope))
+                    .catch(err => console.log('Error al registrar SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
